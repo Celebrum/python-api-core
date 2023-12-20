@@ -14,6 +14,7 @@
 
 import pytest
 
+
 def test_legacy_imports_retry_unary_sync():
     # TODO: Delete this test when when we revert these imports on the
     #       next major version release
