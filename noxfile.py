@@ -44,16 +44,6 @@ nox.options.sessions = [
 ]
 
 
-def _greater_or_equal_than_37(version_string):
-    tokens = version_string.split(".")
-    for i, token in enumerate(tokens):
-        try:
-            tokens[i] = int(token)
-        except ValueError:
-            pass
-    return tokens >= [3, 7]
-
-
 @nox.session(python=DEFAULT_PYTHON_VERSION)
 def lint(session):
     """Run linters.
@@ -129,16 +119,13 @@ def default(session, install_grpc=True):
         ),
     ]
 
-    # Inject AsyncIO content and proto-plus, if version >= 3.7.
-    # proto-plus is needed for a field mask test in test_protobuf_helpers.py
-    if _greater_or_equal_than_37(session.python):
-        session.install("asyncmock", "pytest-asyncio", "proto-plus")
+    session.install("asyncmock", "pytest-asyncio")
 
-        # Having positional arguments means the user wants to run specific tests.
-        # Best not to add additional tests to that list.
-        if not session.posargs:
-            pytest_args.append("--cov=tests.asyncio")
-            pytest_args.append(os.path.join("tests", "asyncio"))
+    # Having positional arguments means the user wants to run specific tests.
+    # Best not to add additional tests to that list.
+    if not session.posargs:
+        pytest_args.append("--cov=tests.asyncio")
+        pytest_args.append(os.path.join("tests", "asyncio"))
 
     session.run(*pytest_args)
 
@@ -191,7 +178,9 @@ def mypy(session):
     session.install(
         "types-setuptools",
         "types-requests",
-        "types-protobuf",
+        # TODO(https://github.com/googleapis/python-api-core/issues/642):
+        # Use the latest version of types-protobuf.
+        "types-protobuf<5",
         "types-mock",
         "types-dataclasses",
     )
@@ -215,7 +204,20 @@ def docs(session):
     """Build the docs for this library."""
 
     session.install("-e", ".[grpc]")
-    session.install("sphinx==4.2.0", "alabaster", "recommonmark")
+    session.install(
+        # We need to pin to specific versions of the `sphinxcontrib-*` packages
+        # which still support sphinx 4.x.
+        # See https://github.com/googleapis/sphinx-docfx-yaml/issues/344
+        # and https://github.com/googleapis/sphinx-docfx-yaml/issues/345.
+        "sphinxcontrib-applehelp==1.0.4",
+        "sphinxcontrib-devhelp==1.0.2",
+        "sphinxcontrib-htmlhelp==2.0.1",
+        "sphinxcontrib-qthelp==1.0.3",
+        "sphinxcontrib-serializinghtml==1.1.5",
+        "sphinx==4.5.0",
+        "alabaster",
+        "recommonmark",
+    )
 
     shutil.rmtree(os.path.join("docs", "_build"), ignore_errors=True)
     session.run(
@@ -237,7 +239,20 @@ def docfx(session):
     """Build the docfx yaml files for this library."""
 
     session.install("-e", ".")
-    session.install("alabaster", "recommonmark", "gcp-sphinx-docfx-yaml")
+    session.install(
+        # We need to pin to specific versions of the `sphinxcontrib-*` packages
+        # which still support sphinx 4.x.
+        # See https://github.com/googleapis/sphinx-docfx-yaml/issues/344
+        # and https://github.com/googleapis/sphinx-docfx-yaml/issues/345.
+        "sphinxcontrib-applehelp==1.0.4",
+        "sphinxcontrib-devhelp==1.0.2",
+        "sphinxcontrib-htmlhelp==2.0.1",
+        "sphinxcontrib-qthelp==1.0.3",
+        "sphinxcontrib-serializinghtml==1.1.5",
+        "gcp-sphinx-docfx-yaml",
+        "alabaster",
+        "recommonmark",
+    )
 
     shutil.rmtree(os.path.join("docs", "_build"), ignore_errors=True)
     session.run(

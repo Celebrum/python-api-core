@@ -4,6 +4,66 @@
 
 [1]: https://pypi.org/project/google-api-core/#history
 
+## [2.19.0](https://github.com/googleapis/python-api-core/compare/v2.18.0...v2.19.0) (2024-04-29)
+
+
+### Features
+
+* Add google.api_core.version_header ([#638](https://github.com/googleapis/python-api-core/issues/638)) ([a7b53e9](https://github.com/googleapis/python-api-core/commit/a7b53e9e9a7deb88baf92a2827958429e3677069))
+
+## [2.18.0](https://github.com/googleapis/python-api-core/compare/v2.17.1...v2.18.0) (2024-03-20)
+
+
+### Features
+
+* Add common logic for supporting universe domain ([#621](https://github.com/googleapis/python-api-core/issues/621)) ([94f2ca3](https://github.com/googleapis/python-api-core/commit/94f2ca3b4d094e6e10154634d3463d07ebea2035))
+
+
+### Bug Fixes
+
+* Add _registered_method to grpc ChannelStub ([#614](https://github.com/googleapis/python-api-core/issues/614)) ([5eaaea8](https://github.com/googleapis/python-api-core/commit/5eaaea8a989f8bdbdb5fbc95a155a20837c87f42))
+* **deps:** Require proto-plus &gt;= 1.22.3 ([#626](https://github.com/googleapis/python-api-core/issues/626)) ([4fed37c](https://github.com/googleapis/python-api-core/commit/4fed37cbc32122f156e38250b5fa8b2b08a787a1))
+
+## [2.17.1](https://github.com/googleapis/python-api-core/compare/v2.17.0...v2.17.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* Resolve issue handling protobuf responses in rest streaming ([#604](https://github.com/googleapis/python-api-core/issues/604)) ([bcebc92](https://github.com/googleapis/python-api-core/commit/bcebc92eca69dae81c5e546d526c92b164a6b3b4))
+
+## [2.17.0](https://github.com/googleapis/python-api-core/compare/v2.16.2...v2.17.0) (2024-02-06)
+
+
+### Features
+
+* Add attempt_direct_path argument to create_channel ([#583](https://github.com/googleapis/python-api-core/issues/583)) ([94726e7](https://github.com/googleapis/python-api-core/commit/94726e739698035b00667983f854c600252abd28))
+
+
+### Bug Fixes
+
+* Retry constructors methods support None ([#592](https://github.com/googleapis/python-api-core/issues/592)) ([416203c](https://github.com/googleapis/python-api-core/commit/416203c1888934670bfeccafe5f5469f87314512))
+
+## [2.16.2](https://github.com/googleapis/python-api-core/compare/v2.16.1...v2.16.2) (2024-02-02)
+
+
+### Bug Fixes
+
+* Spelling error `a,out` -&gt; `amount` ([#596](https://github.com/googleapis/python-api-core/issues/596)) ([88688b1](https://github.com/googleapis/python-api-core/commit/88688b1625c4dab0df6124a0560f550eb322500f))
+
+## [2.16.1](https://github.com/googleapis/python-api-core/compare/v2.16.0...v2.16.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* Fix broken import for google.api_core.retry_async.AsyncRetry ([#587](https://github.com/googleapis/python-api-core/issues/587)) ([ac012c0](https://github.com/googleapis/python-api-core/commit/ac012c04c69b8bbe72962f0d0d9e9536c0b4a524))
+
+## [2.16.0](https://github.com/googleapis/python-api-core/compare/v2.15.0...v2.16.0) (2024-01-29)
+
+
+### Features
+
+* Retry and retry_async support streaming rpcs ([#495](https://github.com/googleapis/python-api-core/issues/495)) ([17ff5f1](https://github.com/googleapis/python-api-core/commit/17ff5f1d83a9a6f50a0226fb0e794634bd584f17))
+
 ## [2.15.0](https://github.com/googleapis/python-api-core/compare/v2.14.0...v2.15.0) (2023-12-07)
 
 
